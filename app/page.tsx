@@ -1,372 +1,754 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
+import Link from "next/link";
+
+import HeroSlider from "../components/HeroSlider";
+
 import DramaCard from "../components/DramaCard";
+
+import DramaRow from "../components/DramaRow";
+
+import SkeletonCard from "../components/SkeletonCard";
+
+import AnimatedSection from "../components/AnimatedSection";
+
+import { useWatchlist } from "./context/WatchlistContext";
+
+import recentShows from "../data/recent";
+
+import SearchBar from "../components/SearchBar";
 
 export default function Home() {
 
-  const [dramas, setDramas] = useState<any[]>([]);
-  const [search, setSearch] = useState("");
-  const [watchlist, setWatchlist] = useState<any[]>([]);
+  const [dramas, setDramas] =
+    useState<any[]>([]);
+
+  const [search, setSearch] =
+    useState("");
+
+  const [searchResults, setSearchResults] =
+    useState<any[]>([]);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  const [searchLoading, setSearchLoading] =
+    useState(false);
 
   const [selectedGenre, setSelectedGenre] =
     useState("All");
 
   const [selectedMood, setSelectedMood] =
-    useState("All");
+  useState("All");
 
-  const genres = [
-    "All",
-    "Romance",
-    "Fantasy",
-    "Comedy",
-  ];
+  const [apiShows, setApiShows] =
+  useState([]);
+  const [apiTrending, setApiTrending] =
+  useState<any[]>([]);
 
-  const moods = [
-    "All",
-    "Comfort",
-    "Heartbreak",
-    "Funny",
-    "Healing",
-    "Fantasy",
-  ];
+const [apiPopular, setApiPopular] =
+  useState<any[]>([]);
 
-  const featuredDrama = dramas[0];
+const [topToday, setTopToday] =
+  useState<any[]>([]);
+
+  const {
+    watchlist,
+    addToWatchlist,
+    removeFromWatchlist,
+  } = useWatchlist();
+
+  /* LOAD */
 
   useEffect(() => {
 
-    async function loadDramas() {
+    setDramas(recentShows);
 
-      try {
-
-        const res = await fetch("/api/dramas");
-
-        const data = await res.json();
-
-        setDramas(data.results || []);
-
-      } catch (error) {
-
-        console.error(error);
-
-      }
-    }
-
-    loadDramas();
-
-    const savedWatchlist =
-      localStorage.getItem("watchlist");
-
-    if (savedWatchlist) {
-
-      setWatchlist(JSON.parse(savedWatchlist));
-
-    }
+    setLoading(false);
 
   }, []);
 
   useEffect(() => {
 
-    localStorage.setItem(
-      "watchlist",
-      JSON.stringify(watchlist)
-    );
+  async function fetchApiRows() {
 
-  }, [watchlist]);
+    try {
 
-  const filteredDramas = dramas.filter((drama) => {
+      const trendingRes =
+        await fetch(
+          "/api/search?q=kdrama"
+        );
 
-    const matchesSearch =
-      drama.name
-        ?.toLowerCase()
-        .includes(search.toLowerCase());
+      const trendingData =
+        await trendingRes.json();
 
-    return matchesSearch;
+      setApiTrending(
+        trendingData.map(
+          (item: any) =>
+            item.show || item
+        )
+      );
 
-  });
+      const popularRes =
+        await fetch(
+          "/api/search?q=romance"
+        );
 
-  const addToWatchlist = (drama: any) => {
+      const popularData =
+        await popularRes.json();
 
-    const alreadyAdded = watchlist.find(
-      (item) => item.id === drama.id
-    );
+      setApiPopular(
+        popularData.map(
+          (item: any) =>
+            item.show || item
+        )
+      );
+      const combined = [
 
-    if (!alreadyAdded) {
+  ...trendingData.map(
+    (item: any) =>
+      item.show || item
+  ),
 
-      setWatchlist([...watchlist, drama]);
+  ...popularData.map(
+    (item: any) =>
+      item.show || item
+  ),
+
+];
+const uniqueShows =
+  combined.filter(
+    (
+      show: any,
+      index: number,
+      self: any[]
+    ) =>
+      index ===
+      self.findIndex(
+        (s: any) =>
+          s.id === show.id
+      )
+  );
+  const sortedShows =
+  uniqueShows.sort(
+    (a: any, b: any) =>
+
+      (
+        b.rating?.average || 0
+      ) -
+
+      (
+        a.rating?.average || 0
+      )
+  );
+  setTopToday(
+  sortedShows.slice(0, 10)
+);
+
+    } catch (error) {
+
+      console.error(error);
 
     }
-  };
 
-  const removeFromWatchlist = (id: number) => {
+  }
 
-    setWatchlist(
-      watchlist.filter(
-        (drama) => drama.id !== id
-      )
+  fetchApiRows();
+
+}, []);
+
+  /* SEARCH */
+
+  useEffect(() => {
+
+    const timer =
+      setTimeout(async () => {
+
+        if (
+          search.trim().length < 2
+        ) {
+
+          setSearchResults([]);
+
+          return;
+
+        }
+
+        try {
+
+          setSearchLoading(true);
+
+          const res =
+            await fetch(
+              `/api/search?q=${encodeURIComponent(search)}`
+            );
+
+          const data =
+            await res.json();
+
+          setSearchResults(
+            Array.isArray(data)
+              ? data
+              : []
+          );
+
+        } catch (error) {
+
+          console.error(error);
+
+          setSearchResults([]);
+
+        } finally {
+
+          setSearchLoading(false);
+
+        }
+
+      }, 500);
+
+    return () =>
+      clearTimeout(timer);
+
+  }, [search]);
+
+  useEffect(() => {
+
+  async function fetchTrending() {
+
+    const res = await fetch(
+      "/api/search?q=kdrama"
     );
-  };
+
+    const data = await res.json();
+
+    setApiShows(data);
+
+  }
+
+  fetchTrending();
+
+}, []);
+ 
+/*moods*/
+
+  const moods = [
+
+  "All",
+
+  "Heartbroken",
+
+  "Feel Good",
+
+  "Healing",
+
+  "Emotional",
+
+  "Dark",
+
+  "Cozy",
+
+  "Romantic",
+
+  "Revenge",
+
+  "Mystery",
+
+  "Thrilling",
+
+];
+  /* FILTER */
+
+  const filteredDramas =
+    dramas.filter((drama) => {
+
+      const matchesSearch =
+
+        (drama.name || "")
+          .toLowerCase()
+          .includes(
+            search.toLowerCase()
+          );
+
+      const matchesGenre =
+
+        selectedGenre === "All" ||
+
+        drama.genres?.some(
+          (genre: any) =>
+
+            genre.name === selectedGenre ||
+
+            genre === selectedGenre
+        );
+      const matchesMood =
+
+  selectedMood === "All" ||
+
+  drama.moods?.includes(
+    selectedMood
+  );
+
+      return (
+  matchesSearch &&
+  matchesGenre &&
+  matchesMood
+);
+
+    });
+
+  
+  /* CATEGORIES */
+
+  const featured =
+    filteredDramas.slice(0, 5);
+
+  const topRatedShows =
+
+    [...filteredDramas]
+
+      .sort(
+
+        (a, b) =>
+
+          (b.vote_average ||
+
+            b.rating?.average ||
+
+            0) -
+
+          (a.vote_average ||
+
+            a.rating?.average ||
+
+            0)
+
+      )
+
+      .slice(0, 10);
+
+  const trendingShows =
+    filteredDramas.slice(0, 10);
+
 
   return (
 
-    <main className="min-h-screen bg-black text-white">
+    <main
+      className="
+      min-h-screen
+      bg-black
+      text-white
+      overflow-x-hidden
+      relative
+    "
+    >
 
-      {/* Navbar */}
-      <nav className="flex flex-col md:flex-row items-center justify-between px-4 md:px-8 py-5 border-b border-gray-800 gap-4 md:gap-0">
+      {/* TOP GRADIENT */}
 
-        <h1 className="text-3xl font-bold text-pink-500">
+      <div
+        className="
+        absolute
+        top-0
+        left-0
+        right-0
+        h-40
+        bg-gradient-to-b
+        from-black
+        to-transparent
+        pointer-events-none
+        z-40
+      "
+      />
+
+      {/* NAVBAR */}
+
+      <nav
+        className="
+        fixed
+        top-0
+        left-0
+        right-0
+        z-50
+        flex
+        items-center
+        justify-between
+        px-8
+        py-5
+        bg-black/30
+        backdrop-blur-2xl
+        border-b
+        border-white/10
+        transition-all
+      "
+      >
+
+        {/* LOGO */}
+
+        <h1
+          className="
+          text-4xl
+          font-black
+          tracking-wide
+          bg-gradient-to-r
+          from-pink-500
+          via-fuchsia-500
+          to-cyan-400
+          bg-clip-text
+          text-transparent
+        "
+        >
+
           Moodrama
+
         </h1>
 
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-gray-300">
-          <button>Home</button>
-          <button>Trending</button>
-          <button>Watchlist</button>
-          <button>Login</button>
+        {/* RIGHT */}
+
+        <div className="flex items-center gap-4">
+
+          <Link
+  href="/top10"
+  className="
+  bg-cyan-500
+  hover:bg-cyan-600
+  px-5
+  py-3
+  rounded-2xl
+  font-bold
+  transition-all
+  "
+>
+  🏆 Top 10
+</Link>
+
+<Link href="/best-romance">
+  <button className="bg-pink-500 px-5 py-3 rounded-xl">
+    ❤️ Romance
+  </button>
+</Link>
+
+<Link href="/best-school">
+  <button className="bg-cyan-500 px-5 py-3 rounded-xl">
+    🎓 School
+  </button>
+</Link>
+
+<Link href="/best-thriller">
+  <button className="bg-red-500 px-5 py-3 rounded-xl">
+    🔥 Thriller
+  </button>
+</Link>
+
+          <Link
+            href="/watchlist"
+
+            className="
+            bg-pink-500
+            hover:bg-pink-600
+            px-5
+            py-3
+            rounded-2xl
+            font-bold
+            transition-all
+            duration-300
+            hover:scale-105
+            shadow-lg
+            shadow-pink-500/20
+          "
+          >
+
+            ⭐ My Watchlist
+
+          </Link>
+
+          <Link
+  href="/trending"
+  className="
+  bg-orange-500
+  hover:bg-orange-600
+  px-5
+  py-3
+  rounded-2xl
+  font-bold
+  transition-all
+  "
+>
+
+  🔥 Trending
+
+</Link>
+
+          <Link
+  href="/most-reviewed"
+  className="
+  bg-cyan-500
+  hover:bg-cyan-600
+  px-5
+  py-3
+  rounded-2xl
+  font-bold
+  transition-all
+  "
+>
+
+  🏆 Most Reviewed
+
+</Link>
+<Link
+  href="/top-rated"
+  className="
+  bg-yellow-500
+  hover:bg-yellow-600
+  px-5
+  py-3
+  rounded-2xl
+  font-bold
+  transition-all
+  "
+>
+
+  ⭐ Top Rated
+
+</Link>
+
         </div>
 
       </nav>
 
-      {/* Hero */}
-      <section
-        className="
-        relative
-        min-h-[85vh]
-        flex
-        items-center
-        px-4
-        md:px-12
-        overflow-hidden
-      "
+      {/* HERO */}
+
+      <div className="pt-24">
+
+        <HeroSlider
+          dramas={featured}
+        />
+
+      </div>
+
+      
+
+     {/* SEARCH */}
+
+<section className="px-8 py-12 relative z-30">
+
+  <div className="max-w-2xl mx-auto">
+
+    <SearchBar
+      search={search}
+      setSearch={setSearch}
+    />
+
+  </div>
+
+</section>
+
+
+      {/* mood FILTERS */}
+
+<section className="px-8 pb-10">
+
+  <h2
+    className="
+    text-2xl
+    font-black
+    mb-5
+  "
+  >
+
+    ✨ Browse By Mood
+
+  </h2>
+
+  <div
+    className="
+    flex
+    gap-4
+    overflow-x-auto
+    scrollbar-hide
+  "
+  >
+
+    {moods.map((mood) => (
+
+      <button
+        key={mood}
+
+        onClick={() =>
+          setSelectedMood(mood)
+        }
+
+        className={`
+          px-6
+          py-3
+          rounded-2xl
+          font-bold
+          whitespace-nowrap
+          transition-all
+          duration-300
+
+          ${
+            selectedMood === mood
+
+              ? `
+                bg-cyan-500
+                text-white
+                shadow-lg
+                shadow-cyan-500/30
+                scale-105
+              `
+
+              : `
+                bg-zinc-900
+                text-gray-300
+                hover:bg-zinc-800
+              `
+          }
+        `}
       >
 
-        {/* Background Image */}
-        {featuredDrama && (
-          <img
-            src={`https://image.tmdb.org/t/p/original${featuredDrama.poster_path}`}
-            alt={featuredDrama.name}
+        {mood}
+
+      </button>
+
+    ))}
+
+  </div>
+
+</section>
+      
+
+      {/* LOADING */}
+
+      {loading && (
+
+        <section className="px-8 py-16">
+
+          <div
             className="
-            absolute
-            inset-0
-            w-full
-            h-full
-            object-cover
-            opacity-30
+            flex
+            gap-6
+            overflow-hidden
           "
-          />
-        )}
+          >
 
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
+            {Array.from({
+              length: 5,
+            }).map((_, index) => (
 
-        {/* Content */}
-        <div className="relative z-10 max-w-2xl">
-
-          <p className="text-pink-500 font-semibold mb-4">
-            Featured Drama
-          </p>
-
-          <h1 className="text-5xl md:text-7xl font-black leading-tight">
-            {featuredDrama?.name}
-          </h1>
-
-          <p className="text-yellow-400 text-xl mt-6">
-            ⭐ {featuredDrama?.vote_average?.toFixed(1)}
-          </p>
-
-          <p className="text-gray-300 text-lg mt-6 leading-relaxed">
-            {featuredDrama?.overview}
-          </p>
-
-          {/* Buttons */}
-          <div className="flex flex-wrap gap-4 mt-10">
-
-            <button
-              className="
-              bg-pink-500
-              hover:bg-pink-600
-              px-8
-              py-4
-              rounded-2xl
-              font-semibold
-              transition
-              hover:scale-105
-            "
-            >
-              ▶ Watch Now
-            </button>
-
-            <button
-              className="
-              bg-white/10
-              backdrop-blur-md
-              border
-              border-white/20
-              px-8
-              py-4
-              rounded-2xl
-              font-semibold
-              transition
-              hover:bg-white/20
-            "
-            >
-              + My List
-            </button>
-
-          </div>
-
-          {/* Search */}
-          <div className="mt-12 flex flex-col sm:flex-row max-w-xl gap-3 sm:gap-0">
-
-            <input
-              type="text"
-              placeholder="Search dramas..."
-              value={search}
-              onChange={(e) =>
-                setSearch(e.target.value)
-              }
-              className="
-              flex-1
-              px-5
-              py-4
-              rounded-xl
-              sm:rounded-l-xl
-              sm:rounded-r-none
-              bg-gray-900/80
-              border
-              border-gray-700
-              outline-none
-              text-white
-            "
-            />
-
-            <button
-              className="
-              bg-pink-500
-              hover:bg-pink-600
-              px-6
-              rounded-xl
-              sm:rounded-r-xl
-              sm:rounded-l-none
-              font-semibold
-              transition
-            "
-            >
-              Search
-            </button>
-
-          </div>
-
-          {/* Genre Buttons */}
-          <div className="flex flex-wrap gap-4 mt-8">
-
-            {genres.map((genre) => (
-
-              <button
-                key={genre}
-                onClick={() =>
-                  setSelectedGenre(genre)
-                }
-                className={`px-5 py-2 rounded-full transition ${
-                  selectedGenre === genre
-                    ? "bg-pink-500 text-white"
-                    : "bg-gray-800 text-gray-300"
-                }`}
-              >
-                {genre}
-              </button>
-
-            ))}
-
-          </div>
-
-          {/* Mood Buttons */}
-          <div className="flex flex-wrap gap-4 mt-6">
-
-            {moods.map((mood) => (
-
-              <button
-                key={mood}
-                onClick={() =>
-                  setSelectedMood(mood)
-                }
-                className={`px-5 py-2 rounded-full transition ${
-                  selectedMood === mood
-                    ? "bg-purple-500 text-white"
-                    : "bg-gray-800 text-gray-300"
-                }`}
-              >
-                {mood}
-              </button>
-
-            ))}
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* Trending */}
-      <section className="px-4 md:px-8 pb-20">
-
-        <h3 className="text-3xl font-bold mb-8">
-          Trending Dramas
-        </h3>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-
-          {filteredDramas.map((drama) => (
-
-            <DramaCard
-              key={drama.id}
-              drama={drama}
-              addToWatchlist={addToWatchlist}
-              removeFromWatchlist={removeFromWatchlist}
-              watchlist={watchlist}
-            />
-
-          ))}
-
-        </div>
-
-      </section>
-
-      {/* Watchlist */}
-      <section className="px-4 md:px-8 pb-20">
-
-        <h3 className="text-3xl font-bold mb-8">
-          My Watchlist
-        </h3>
-
-        {watchlist.length === 0 ? (
-
-          <p className="text-gray-400">
-            No dramas added yet.
-          </p>
-
-        ) : (
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-
-            {watchlist.map((drama) => (
-
-              <DramaCard
-                key={drama.id}
-                drama={drama}
-                addToWatchlist={addToWatchlist}
-                removeFromWatchlist={removeFromWatchlist}
-                watchlist={watchlist}
+              <SkeletonCard
+                key={index}
               />
 
             ))}
 
           </div>
 
-        )}
+        </section>
 
-      </section>
+      )}
 
+      {/* ROWS */}
+
+      {!loading && (
+
+        <main className="px-8 pb-20">
+
+        <AnimatedSection>
+
+  <DramaRow
+    title="🏆 Top 10 Today"
+    dramas={topToday}
+    watchlist={watchlist}
+    addToWatchlist={addToWatchlist}
+    removeFromWatchlist={removeFromWatchlist}
+  />
+
+</AnimatedSection>
+
+          <AnimatedSection>
+
+            <DramaRow
+              title="🔥 Trending Now"
+              dramas={trendingShows}
+              watchlist={watchlist}
+              addToWatchlist={addToWatchlist}
+              removeFromWatchlist={removeFromWatchlist}
+            />
+
+          </AnimatedSection>
+
+          <AnimatedSection>
+
+            <DramaRow
+              title="⭐ Top Rated"
+              dramas={topRatedShows}
+              watchlist={watchlist}
+              addToWatchlist={addToWatchlist}
+              removeFromWatchlist={removeFromWatchlist}
+              />
+        </AnimatedSection>
+
+        <AnimatedSection>
+
+  <DramaRow
+    title="🔥 Global Trending"
+    dramas={apiTrending}
+    watchlist={watchlist}
+    addToWatchlist={addToWatchlist}
+    removeFromWatchlist={removeFromWatchlist}
+  />
+
+</AnimatedSection>
+
+<AnimatedSection>
+
+  <DramaRow
+    title="💖 Popular Romance"
+    dramas={apiPopular}
+    watchlist={watchlist}
+    addToWatchlist={addToWatchlist}
+    removeFromWatchlist={removeFromWatchlist}
+  />
+
+</AnimatedSection>
+        </main>
+
+)}
+<footer
+  className="
+  border-t
+  border-white/10
+  mt-20
+  py-10
+  text-center
+  text-gray-400
+  "
+>
+
+  <div className="flex justify-center gap-8 flex-wrap">
+
+    <Link href="/about">
+      About
+    </Link>
+
+    <Link href="/privacy-policy">
+      Privacy Policy
+    </Link>
+
+    <Link href="/disclaimer">
+      Disclaimer
+    </Link>
+
+    <Link href="/contact">
+      Contact
+    </Link>
+
+  </div>
+
+</footer>
     </main>
+
   );
+
 }
