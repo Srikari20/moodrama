@@ -383,10 +383,8 @@ useEffect(() => {
         localDrama.name
       );
 
-      loadPeopleAlsoWatched(
-        localDrama.genres?.[0] ||
-        "Drama"
-      );
+      loadPeopleAlsoWatched("Drama");
+      
 
       loadReviews(
         localDrama.id.toString()
