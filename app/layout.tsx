@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 
 import {
   WatchlistProvider,
@@ -22,13 +23,29 @@ export default function RootLayout({
 
       <body>
 
-        <WatchlistProvider>
+  <WatchlistProvider>
+    {children}
+  </WatchlistProvider>
 
-          {children}
+  <Script
+    src="https://www.googletagmanager.com/gtag/js?id=G-3DZ2V5YXXN"
+    strategy="afterInteractive"
+  />
 
-        </WatchlistProvider>
+  <Script
+    id="google-analytics"
+    strategy="afterInteractive"
+  >
+    {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      </body>
+      gtag('config', 'G-3DZ2V5YXXN');
+    `}
+  </Script>
+
+</body>
 
     </html>
   );
