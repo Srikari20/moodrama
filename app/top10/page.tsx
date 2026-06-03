@@ -5,11 +5,7 @@ import { useEffect, useState } from "react";
 import DramaCard from "../../components/DramaCard";
 import { useWatchlist } from "../context/WatchlistContext";
 
-export const metadata = {
-  title: "Top 10 Dramas | Moodrama",
-  description:
-    "The top 10 must-watch dramas selected by Moodrama.",
-};
+
 
 export default function Top10Page() {
 

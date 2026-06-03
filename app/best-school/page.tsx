@@ -4,11 +4,7 @@ import recentShows from "../../data/recent";
 import DramaCard from "../../components/DramaCard";
 import { useWatchlist } from "../context/WatchlistContext";
 
-export const metadata = {
-  title: "Best School Dramas | Moodrama",
-  description:
-    "Discover the best school dramas including Korean, Chinese and Japanese series.",
-};
+
 
 export default function BestSchoolPage() {
 

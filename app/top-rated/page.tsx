@@ -9,11 +9,7 @@ import {
 
 import { db } from "../../lib/firebase";
 
-export const metadata = {
-  title: "Top Rated Dramas By Community | Moodrama",
-  description:
-    "Explore the highest-rated dramas based on community reviews and ratings.",
-};
+
 
 export default function TopRatedPage() {
 

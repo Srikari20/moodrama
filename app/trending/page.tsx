@@ -4,11 +4,7 @@ import { useEffect, useState } from "react";
 import DramaCard from "../../components/DramaCard";
 import { useWatchlist } from "../context/WatchlistContext";
 
-export const metadata = {
-  title: "Trending Dramas | Moodrama",
-  description:
-    "See which dramas are trending among viewers right now.",
-};
+
 
 export default function TrendingPage() {
 
