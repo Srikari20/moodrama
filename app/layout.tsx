@@ -7,8 +7,12 @@ import {
 
 export const metadata = {
   title: "Moodrama",
-  description:
-    "Discover your next favorite drama",
+  description: "Discover your next favorite drama",
+
+  verification: {
+    google:
+      "3jwBjGfkW4hxU4thgZXgNjv2ueozFILzLiMCnw7q6d8",
+  },
 };
 
 export default function RootLayout({
