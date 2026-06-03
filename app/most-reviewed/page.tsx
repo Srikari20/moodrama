@@ -8,11 +8,7 @@ import {
 } from "firebase/firestore";
 
 import { db } from "../../lib/firebase";
-export const metadata = {
-  title: "Most Reviewed Dramas | Moodrama",
-  description:
-    "Discover dramas receiving the most reviews from the Moodrama community.",
-};
+
 
 export default function MostReviewedPage() {
 
