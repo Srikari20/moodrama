@@ -4,6 +4,12 @@ import recentShows from "../../data/recent";
 import DramaCard from "../../components/DramaCard";
 import { useWatchlist } from "../context/WatchlistContext";
 
+export const metadata = {
+  title: "Best Thriller Dramas | Moodrama",
+  description:
+    "Top thriller dramas packed with suspense, mystery and action.",
+};
+
 export default function BestThrillerPage() {
 
   const {

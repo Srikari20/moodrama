@@ -4,6 +4,12 @@ import recentShows from "../../data/recent";
 import DramaCard from "../../components/DramaCard";
 import { useWatchlist } from "../context/WatchlistContext";
 
+export const metadata = {
+  title: "Best Romance Dramas | Moodrama",
+  description:
+    "Discover the best romance dramas to watch right now.",
+};
+
 export default function BestRomancePage() {
 
   const {
