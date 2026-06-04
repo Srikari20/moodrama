@@ -13,6 +13,10 @@ export const metadata = {
     google:
       "3jwBjGfkW4hxU4thgZXgNjv2ueozFILzLiMCnw7q6d8",
   },
+  other: {
+    "google-adsense-account":
+      "ca-pub-2629499247902739",
+  },
 };
 
 export default function RootLayout({
