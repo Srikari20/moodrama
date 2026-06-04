@@ -1,54 +1,49 @@
 "use client";
 
 import Link from "next/link";
+import DramaCard from "@/components/DramaCard";
+import recentShows from "@/data/recent";
 
 export default function BestActionPage() {
-  return (
-    <main className="min-h-screen bg-black text-white px-8 py-12">
 
-      <h1 className="text-5xl font-black mb-6">
-        ⚔️ Best Action Dramas To Watch
-      </h1>
+const dramas = recentShows.filter(
+(drama) =>
+drama.moods?.includes("Action") ||
+drama.moods?.includes("Thrilling")
+);
 
-      <p className="text-gray-400 mb-10">
-        Love intense fights, thrilling missions,
-        crime investigations and nonstop action?
-        These dramas deliver excitement from start to finish.
-      </p>
+return ( <main className="min-h-screen bg-black text-white px-8 py-12">
 
-      <div className="space-y-6">
 
-        <div className="bg-zinc-900 p-6 rounded-2xl">
-          <h2 className="text-2xl font-bold">
-            Moving
-          </h2>
+  <h1 className="text-5xl font-black mb-6">
+    ⚔️ Best Action Dramas
+  </h1>
 
-          <p className="text-gray-300 mt-2">
-            Superpowered teenagers and their parents
-            try to survive dangerous government secrets.
-          </p>
-        </div>
+  <p className="text-gray-400 mb-10">
+    Explosive action, intense fights, suspense and unforgettable heroes.
+  </p>
 
-        <div className="bg-zinc-900 p-6 rounded-2xl">
-          <h2 className="text-2xl font-bold">
-            Vincenzo
-          </h2>
+  <div className="grid md:grid-cols-4 gap-6">
+    {dramas.map((drama) => (
+      <DramaCard
+        key={drama.id}
+        drama={drama}
+        watchlist={[]}
+        addToWatchlist={() => {}}
+        removeFromWatchlist={() => {}}
+      />
+    ))}
+  </div>
 
-          <p className="text-gray-300 mt-2">
-            A Korean mafia lawyer returns home and
-            takes revenge against powerful villains.
-          </p>
-        </div>
+  <Link
+    href="/"
+    className="inline-block mt-10 bg-pink-500 px-6 py-3 rounded-xl font-bold"
+  >
+    ← Back Home
+  </Link>
 
-      </div>
+</main>
 
-      <Link
-        href="/"
-        className="inline-block mt-10 bg-pink-500 px-6 py-3 rounded-xl font-bold"
-      >
-        ← Back Home
-      </Link>
 
-    </main>
-  );
+);
 }

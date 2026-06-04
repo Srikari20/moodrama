@@ -1,53 +1,64 @@
 "use client";
 
 import Link from "next/link";
+import DramaCard from "@/components/DramaCard";
+import recentShows from "@/data/recent";
 
 export default function BestFantasyPage() {
-  return (
-    <main className="min-h-screen bg-black text-white px-8 py-12">
 
-      <h1 className="text-5xl font-black mb-6">
-        ✨ Best Fantasy Dramas To Watch
-      </h1>
+const fantasyDramas =
+recentShows.filter(
+drama =>
+drama.moods?.includes("Fantasy")
+);
 
-      <p className="text-gray-400 mb-10">
-        Looking for magical worlds, supernatural powers,
-        gods, demons, and unforgettable fantasy stories?
-        These fantasy dramas are among the best.
-      </p>
+return (
 
-      <div className="space-y-6">
 
-        <div className="bg-zinc-900 p-6 rounded-2xl">
-          <h2 className="text-2xl font-bold">
-            Goblin
-          </h2>
+<main className="min-h-screen bg-black text-white px-8 py-12">
 
-          <p className="text-gray-300 mt-2">
-            A legendary immortal warrior searches for the
-            one person who can end his curse.
-          </p>
-        </div>
+  <h1 className="text-5xl font-black mb-6">
+    ✨ Best Fantasy Dramas
+  </h1>
 
-        <div className="bg-zinc-900 p-6 rounded-2xl">
-          <h2 className="text-2xl font-bold">
-            Alchemy of Souls
-          </h2>
+  <p className="text-gray-400 mb-10">
+    Discover magical worlds, supernatural powers,
+    unforgettable romance and fantasy adventures.
+  </p>
 
-          <p className="text-gray-300 mt-2">
-            Magic, destiny, forbidden powers and romance.
-          </p>
-        </div>
+  <div className="grid md:grid-cols-4 gap-6">
 
-      </div>
+    {fantasyDramas.map((drama) => (
 
-      <Link
-        href="/"
-        className="inline-block mt-10 bg-pink-500 px-6 py-3 rounded-xl font-bold"
-      >
-        ← Back Home
-      </Link>
+      <DramaCard
+        key={drama.id}
+        drama={drama}
+        watchlist={[]}
+        addToWatchlist={() => {}}
+        removeFromWatchlist={() => {}}
+      />
 
-    </main>
-  );
+    ))}
+
+  </div>
+
+  <Link
+    href="/"
+    className="
+    inline-block
+    mt-10
+    bg-pink-500
+    px-6
+    py-3
+    rounded-xl
+    font-bold
+    "
+  >
+    ← Back Home
+  </Link>
+
+</main>
+
+
+);
 }
