@@ -231,33 +231,7 @@ const uniqueShows =
 
 }, []);
  
-/*moods*/
 
-  const moods = [
-
-  "All",
-
-  "Heartbroken",
-
-  "Feel Good",
-
-  "Healing",
-
-  "Emotional",
-
-  "Dark",
-
-  "Cozy",
-
-  "Romantic",
-
-  "Revenge",
-
-  "Mystery",
-
-  "Thrilling",
-
-];
   /* FILTER */
 
   const filteredDramas =
@@ -404,42 +378,7 @@ const uniqueShows =
         </h1>
 
         {/* RIGHT */}
-
-        <div className="flex items-center gap-4">
-
-          <Link
-  href="/top10"
-  className="
-  bg-cyan-500
-  hover:bg-cyan-600
-  px-5
-  py-3
-  rounded-2xl
-  font-bold
-  transition-all
-  "
->
-  🏆 Top 10
-</Link>
-
-<Link href="/best-romance">
-  <button className="bg-pink-500 px-5 py-3 rounded-xl">
-    ❤️ Romance
-  </button>
-</Link>
-
-<Link href="/best-school">
-  <button className="bg-cyan-500 px-5 py-3 rounded-xl">
-    🎓 School
-  </button>
-</Link>
-
-<Link href="/best-thriller">
-  <button className="bg-red-500 px-5 py-3 rounded-xl">
-    🔥 Thriller
-  </button>
-</Link>
-
+         
           <Link
             href="/watchlist"
 
@@ -462,58 +401,6 @@ const uniqueShows =
 
           </Link>
 
-          <Link
-  href="/trending"
-  className="
-  bg-orange-500
-  hover:bg-orange-600
-  px-5
-  py-3
-  rounded-2xl
-  font-bold
-  transition-all
-  "
->
-
-  🔥 Trending
-
-</Link>
-
-          <Link
-  href="/most-reviewed"
-  className="
-  bg-cyan-500
-  hover:bg-cyan-600
-  px-5
-  py-3
-  rounded-2xl
-  font-bold
-  transition-all
-  "
->
-
-  🏆 Most Reviewed
-
-</Link>
-<Link
-  href="/top-rated"
-  className="
-  bg-yellow-500
-  hover:bg-yellow-600
-  px-5
-  py-3
-  rounded-2xl
-  font-bold
-  transition-all
-  "
->
-
-  ⭐ Top Rated
-
-</Link>
-
-        </div>
-
       </nav>
 
       {/* HERO */}
@@ -522,11 +409,8 @@ const uniqueShows =
 
         <HeroSlider
           dramas={featured}
-        />
-
-      </div>
-
-      
+        /> 
+        </div>
 
      {/* SEARCH */}
 
@@ -543,79 +427,103 @@ const uniqueShows =
 
 </section>
 
+ <section className="px-8 py-12">
 
-      {/* mood FILTERS */}
-
-<section className="px-8 pb-10">
-
-  <h2
-    className="
-    text-2xl
-    font-black
-    mb-5
-  "
-  >
-
-    ✨ Browse By Mood
-
+  <h2 className="text-4xl font-black mb-8">
+    🎬 Explore Categories
   </h2>
 
-  <div
-    className="
-    flex
-    gap-4
-    overflow-x-auto
-    scrollbar-hide
-  "
-  >
+  <div className="flex gap-4 overflow-x-auto pb-2">
 
-    {moods.map((mood) => (
+    <Link
+      href="/top10"
+      className="bg-cyan-500 p-4 rounded-2xl font-semibold text-center"
+    >
+      🏆 Top 10
+    </Link>
 
-      <button
-        key={mood}
+    <Link
+      href="/best-romance"
+      className="bg-pink-500 p-4 rounded-2xl font-semibold text-center"
+    >
+      ❤️ Romance
+    </Link>
 
-        onClick={() =>
-          setSelectedMood(mood)
-        }
+    <Link
+      href="/best-school"
+      className="bg-blue-500 p-4 rounded-2xl font-semibold text-center"
+    >
+      🎓 School
+    </Link>
 
-        className={`
-          px-6
-          py-3
-          rounded-2xl
-          font-bold
-          whitespace-nowrap
-          transition-all
-          duration-300
+    <Link
+      href="/best-thriller"
+      className="bg-red-500 p-4 rounded-2xl font-semibold text-center"
+    >
+      🔥 Thriller
+    </Link>
 
-          ${
-            selectedMood === mood
+    <Link
+      href="/trending"
+      className="bg-orange-500 p-4 rounded-2xl font-semibold text-center"
+    >
+      🔥 Trending
+    </Link>
 
-              ? `
-                bg-cyan-500
-                text-white
-                shadow-lg
-                shadow-cyan-500/30
-                scale-105
-              `
+    <Link
+      href="/most-reviewed"
+      className="bg-cyan-500 p-4 rounded-2xl font-semibold text-center"
+    >
+      🏆 Most Reviewed
+    </Link>
 
-              : `
-                bg-zinc-900
-                text-gray-300
-                hover:bg-zinc-800
-              `
-          }
-        `}
-      >
+    <Link
+      href="/top-rated"
+      className="bg-yellow-500 p-4 rounded-2xl font-semibold text-center"
+    >
+      ⭐ Top Rated
+    </Link>
 
-        {mood}
+    <Link
+      href="/recommendations"
+      className="bg-purple-500 p-4 rounded-2xl font-semibold text-center"
+    >
+      🎭 By Mood
+    </Link>
+    <Link href="/best-fantasy">
+  <button className="bg-purple-500 px-5 py-3 rounded-xl">
+    ✨ Fantasy
+  </button>
+</Link>
 
-      </button>
+<Link href="/best-action">
+  <button className="bg-red-500 px-5 py-3 rounded-xl">
+    ⚔️ Action
+  </button>
+</Link>
 
-    ))}
+<Link href="/best-historical">
+  <button className="bg-amber-500 px-5 py-3 rounded-xl">
+    🏯 Historical
+  </button>
+</Link>
+
+<Link href="/best-revenge">
+  <button className="bg-orange-500 px-5 py-3 rounded-xl">
+    🔥 Revenge
+  </button>
+</Link>
+
+<Link href="/best-chinese">
+  <button className="bg-cyan-500 px-5 py-3 rounded-xl">
+    🇨🇳 Chinese
+  </button>
+</Link>
 
   </div>
 
 </section>
+
       
 
       {/* LOADING */}
@@ -715,38 +623,6 @@ const uniqueShows =
         </main>
 
 )}
-<footer
-  className="
-  border-t
-  border-white/10
-  mt-20
-  py-10
-  text-center
-  text-gray-400
-  "
->
-
-  <div className="flex justify-center gap-8 flex-wrap">
-
-    <Link href="/about">
-      About
-    </Link>
-
-    <Link href="/privacy-policy">
-      Privacy Policy
-    </Link>
-
-    <Link href="/disclaimer">
-      Disclaimer
-    </Link>
-
-    <Link href="/contact">
-      Contact
-    </Link>
-
-  </div>
-
-</footer>
     </main>
 
   );

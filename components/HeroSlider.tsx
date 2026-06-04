@@ -85,8 +85,8 @@ export default function HeroSlider({
           w-full
           h-full
           object-cover
-          scale-105
-          opacity-60
+          scale-100
+          opacity-85
           transition-all
           duration-1000
         "
@@ -110,8 +110,8 @@ export default function HeroSlider({
         absolute
         inset-0
         bg-gradient-to-r
-        from-black
-        via-black/70
+        from-black/80
+        via-black/30
         to-transparent
       "
       />
@@ -121,8 +121,8 @@ export default function HeroSlider({
         absolute
         inset-0
         bg-gradient-to-t
-        from-black
-        via-black/20
+        from-black/70
+        via-black/10
         to-transparent
       "
       />
