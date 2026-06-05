@@ -426,104 +426,271 @@ const uniqueShows =
   </div>
 
 </section>
+<section>
+ <div
+  className="
+  grid
+  grid-cols-2
+  md:grid-cols-4
+  lg:grid-cols-6
+  gap-6
+  "
+>
 
- <section className="px-8 py-12">
+  <Link
+    href="/top10"
+    className="
+    bg-cyan-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
+    🏆 Top 10
+  </Link>
 
-  <h2 className="text-4xl font-black mb-8">
-    🎬 Explore Categories
-  </h2>
+  <Link
+    href="/best-romance"
+    className="
+    bg-pink-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
+    ❤️ Romance
+  </Link>
 
-  <div className="flex gap-4 overflow-x-auto pb-2">
+  <Link
+    href="/best-school"
+    className="
+    bg-blue-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
+    🎓 School
+  </Link>
 
-    <Link
-      href="/top10"
-      className="bg-cyan-500 p-4 rounded-2xl font-semibold text-center"
-    >
-      🏆 Top 10
-    </Link>
+  <Link
+    href="/best-thriller"
+    className="
+    bg-red-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
+    🔥 Thriller
+  </Link>
 
-    <Link
-      href="/best-romance"
-      className="bg-pink-500 p-4 rounded-2xl font-semibold text-center"
-    >
-      ❤️ Romance
-    </Link>
+  <Link
+    href="/trending"
+    className="
+    bg-orange-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
+    🔥 Trending
+  </Link>
 
-    <Link
-      href="/best-school"
-      className="bg-blue-500 p-4 rounded-2xl font-semibold text-center"
-    >
-      🎓 School
-    </Link>
+  <Link
+    href="/most-reviewed"
+    className="
+    bg-cyan-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
+    🏆 Most Reviewed
+  </Link>
 
-    <Link
-      href="/best-thriller"
-      className="bg-red-500 p-4 rounded-2xl font-semibold text-center"
-    >
-      🔥 Thriller
-    </Link>
+  <Link
+    href="/top-rated"
+    className="
+    bg-yellow-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
+    ⭐ Top Rated
+  </Link>
 
-    <Link
-      href="/trending"
-      className="bg-orange-500 p-4 rounded-2xl font-semibold text-center"
-    >
-      🔥 Trending
-    </Link>
+  <Link
+    href="/recommendations"
+    className="
+    bg-purple-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
+    🎭 By Mood
+  </Link>
 
-    <Link
-      href="/most-reviewed"
-      className="bg-cyan-500 p-4 rounded-2xl font-semibold text-center"
-    >
-      🏆 Most Reviewed
-    </Link>
-
-    <Link
-      href="/top-rated"
-      className="bg-yellow-500 p-4 rounded-2xl font-semibold text-center"
-    >
-      ⭐ Top Rated
-    </Link>
-
-    <Link
-      href="/recommendations"
-      className="bg-purple-500 p-4 rounded-2xl font-semibold text-center"
-    >
-      🎭 By Mood
-    </Link>
-    <Link href="/best-fantasy">
-  <button className="bg-purple-500 px-5 py-3 rounded-xl">
+  <Link
+    href="/best-fantasy"
+    className="
+    bg-violet-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
     ✨ Fantasy
-  </button>
-</Link>
+  </Link>
 
-<Link href="/best-action">
-  <button className="bg-red-500 px-5 py-3 rounded-xl">
+  <Link
+    href="/best-action"
+    className="
+    bg-red-600
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
     ⚔️ Action
-  </button>
-</Link>
+  </Link>
 
-<Link href="/best-historical">
-  <button className="bg-amber-500 px-5 py-3 rounded-xl">
+  <Link
+    href="/best-historical"
+    className="
+    bg-amber-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
     🏯 Historical
-  </button>
-</Link>
+  </Link>
 
-<Link href="/best-revenge">
-  <button className="bg-orange-500 px-5 py-3 rounded-xl">
+  <Link
+    href="/best-revenge"
+    className="
+    bg-orange-600
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
     🔥 Revenge
-  </button>
-</Link>
+  </Link>
 
-<Link href="/best-chinese">
-  <button className="bg-cyan-500 px-5 py-3 rounded-xl">
+  <Link
+    href="/best-chinese"
+    className="
+    bg-sky-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
     🇨🇳 Chinese
-  </button>
-</Link>
+  </Link>
 
-  </div>
+  <Link
+    href="/best-korean-dramas"
+    className="
+    bg-green-500
+    h-24
+    flex
+    items-center
+    justify-center
+    rounded-2xl
+    font-bold
+    text-lg
+    hover:scale-105
+    transition-all
+    "
+  >
+    🇰🇷 Korean Dramas
+  </Link>
 
+</div>
 </section>
-
       
 
       {/* LOADING */}
@@ -562,17 +729,7 @@ const uniqueShows =
 
         <main className="px-8 pb-20">
 
-        <AnimatedSection>
-
-  <DramaRow
-    title="🏆 Top 10 Today"
-    dramas={topToday}
-    watchlist={watchlist}
-    addToWatchlist={addToWatchlist}
-    removeFromWatchlist={removeFromWatchlist}
-  />
-
-</AnimatedSection>
+        
 
           <AnimatedSection>
 

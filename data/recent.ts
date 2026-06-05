@@ -392,6 +392,396 @@ const recentShows = [
   summary:
     "Two strangers become trapped in a deadly bus explosion time loop.",
 },
+{
+  id: 16,
+
+  name: "Descendants of the Sun",
+
+  language: "Korean",
+
+  rating: {
+    average: 8.9,
+  },
+
+  image: {
+    original: "/images/dots.jpg",
+  },
+
+  moods: [
+    "Romantic",
+    "Action",
+    "Healing",
+    "Emotional"
+  ],
+
+  summary:
+    "A soldier and a doctor fall in love while serving in dangerous regions.",
+},
+
+{
+  id: 17,
+
+  name: "Vincenzo",
+
+  language: "Korean",
+
+  rating: {
+    average: 9.1,
+  },
+
+  image: {
+    original: "/images/vincenzo.jpg",
+  },
+
+  moods: [
+    "Revenge",
+    "Action",
+    "Dark",
+    "Thrilling"
+  ],
+
+  summary:
+    "A Korean-Italian mafia lawyer returns to Korea and fights corruption.",
+},
+
+{
+  id: 18,
+
+  name: "Kingdom",
+
+  language: "Korean",
+
+  rating: {
+    average: 9.0,
+  },
+
+  image: {
+    original: "/images/kingdom.jpg",
+  },
+
+  moods: [
+    "Historical",
+    "Thrilling",
+    "Dark",
+    "Action"
+  ],
+
+  summary:
+    "A crown prince investigates a mysterious plague that turns people into monsters.",
+},
+
+{
+  id: 19,
+
+  name: "Mr. Sunshine",
+
+  language: "Korean",
+
+  rating: {
+    average: 9.2,
+  },
+
+  image: {
+    original: "/images/mrsunshine.jpg",
+  },
+
+  moods: [
+    "Historical",
+    "Romantic",
+    "Emotional",
+    "Heartbroken"
+  ],
+
+  summary:
+    "A Korean boy returns as an American soldier and falls in love during a turbulent era.",
+},
+
+{
+  id: 20,
+
+  name: "Moon Lovers: Scarlet Heart Ryeo",
+
+  language: "Korean",
+
+  rating: {
+    average: 9.0,
+  },
+
+  image: {
+    original: "/images/moonlovers.jpg",
+  },
+
+  moods: [
+    "Historical",
+    "Heartbroken",
+    "Romantic",
+    "Emotional"
+  ],
+
+  summary:
+    "A modern woman travels back to the Goryeo Dynasty and becomes entangled with princes.",
+},
+
+{
+  id: 21,
+
+  name: "Extraordinary Attorney Woo",
+
+  language: "Korean",
+
+  rating: {
+    average: 9.1,
+  },
+
+  image: {
+    original: "/images/attorneywoo.jpg",
+  },
+
+  moods: [
+    "Healing",
+    "Feel Good",
+    "Cozy",
+    "Emotional"
+  ],
+
+  summary:
+    "A brilliant autistic lawyer navigates challenges in court and life.",
+},
+
+{
+  id: 22,
+
+  name: "Twenty Five Twenty One",
+
+  language: "Korean",
+
+  rating: {
+    average: 9.2,
+  },
+
+  image: {
+    original: "/images/2521.jpg",
+  },
+
+  moods: [
+    "Romantic",
+    "Healing",
+    "Heartbroken",
+    "Emotional"
+  ],
+
+  summary:
+    "Young dreamers pursue love and ambition during Korea's financial crisis.",
+},
+
+{
+  id: 23,
+
+  name: "The Red Sleeve",
+
+  language: "Korean",
+
+  rating: {
+    average: 9.0,
+  },
+
+  image: {
+    original: "/images/redsleeve.jpg",
+  },
+
+  moods: [
+    "Historical",
+    "Romantic",
+    "Heartbroken",
+    "Emotional"
+  ],
+
+  summary:
+    "A court lady captures the heart of a crown prince in Joseon.",
+},
+
+{
+  id: 24,
+
+  name: "Nirvana in Fire",
+
+  language: "Chinese",
+
+  rating: {
+    average: 9.4,
+  },
+
+  image: {
+    original: "/images/nirvanainfire.jpg",
+  },
+
+  moods: [
+    "Historical",
+    "Revenge",
+    "Action",
+    "Mystery"
+  ],
+
+  summary:
+    "A strategist seeks justice and revenge for a fallen army.",
+},
+
+{
+  id: 25,
+
+  name: "Love Like the Galaxy",
+
+  language: "Chinese",
+
+  rating: {
+    average: 8.9,
+  },
+
+  image: {
+    original: "/images/lovelikethegalaxy.jpg",
+  },
+
+  moods: [
+    "Historical",
+    "Romantic",
+    "Healing",
+    "Emotional"
+  ],
+
+  summary:
+    "A clever young woman finds love while navigating political turmoil.",
+},
+
+{
+  id: 26,
+
+  name: "Who Rules The World",
+
+  language: "Chinese",
+
+  rating: {
+    average: 8.8,
+  },
+
+  image: {
+    original: "/images/whorulestheworld.jpg",
+  },
+
+  moods: [
+    "Action",
+    "Fantasy",
+    "Romantic",
+    "Historical"
+  ],
+
+  summary:
+    "Two legendary martial artists become entangled in political conflict.",
+},
+
+{
+  id: 27,
+
+  name: "Joy of Life",
+
+  language: "Chinese",
+
+  rating: {
+    average: 9.1,
+  },
+
+  image: {
+    original: "/images/joyoflife.jpg",
+  },
+
+  moods: [
+    "Historical",
+    "Mystery",
+    "Action",
+    "Fantasy"
+  ],
+
+  summary:
+    "A modern-minded young man rises through power struggles in an ancient kingdom.",
+},
+
+{
+  id: 28,
+
+  name: "My Dearest",
+
+  language: "Korean",
+
+  rating: {
+    average: 9.3,
+  },
+
+  image: {
+    original: "/images/mydearest.jpg",
+  },
+
+  moods: [
+    "Historical",
+    "Romantic",
+    "Heartbroken",
+    "Emotional"
+  ],
+
+  summary:
+    "A sweeping love story unfolds during the Qing invasion of Joseon.",
+},
+
+{
+  id: 29,
+
+  name: "Happiness",
+
+  language: "Korean",
+
+  rating: {
+    average: 8.9,
+  },
+
+  image: {
+    original: "/images/happiness.jpg",
+  },
+
+  moods: [
+    "Thrilling",
+    "Action",
+    "Dark",
+    "Mystery"
+  ],
+
+  summary:
+    "Residents become trapped in an apartment complex during a deadly outbreak.",
+},
+
+{
+  id: 30,
+
+  name: "My Liberation Notes",
+
+  language: "Korean",
+
+  rating: {
+    average: 9.0,
+  },
+
+  image: {
+    original: "/images/liberationnotes.jpg",
+  },
+
+  moods: [
+    "Healing",
+    "Cozy",
+    "Emotional",
+    "Heartbroken"
+  ],
+
+  summary:
+    "Three siblings seek freedom and meaning in their ordinary lives.",
+},
 ];
+
 
 export default recentShows;
